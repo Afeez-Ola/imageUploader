@@ -12,8 +12,7 @@ class uploadHandler(tornado.web.RequestHandler):
         
         for file in files:
             fh = open(f"img/{file.filename}", "wb")
-            fh.write(f"{file.body}")
-            
+            fh.write(file.body)
             fh.close()
         self.write(f"http://localhost:3000/img/{file.filename}")
     

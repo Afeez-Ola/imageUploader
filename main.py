@@ -4,7 +4,18 @@ import tornado.ioloop
 
 class uploadHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("We are live baby!")
+        self.render("index.html")
+
+    def post(self):
+        
+        files = self.request.files["imgFile"]
+        
+        for file in files:
+            fh = open(f"img/{file.filename}", "wb")
+            fh.write(f"{file.body}")
+            
+            fh.close()
+        self.write(f"http://localhost:3000/img/{file.filename}")
     
 
 if __name__ == "__main__":
